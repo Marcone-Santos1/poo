@@ -1,6 +1,6 @@
 <?php
 
-namespace Src;
+namespace Src\Modelo\Conta;
 
 use DomainException;
 use ValueError;

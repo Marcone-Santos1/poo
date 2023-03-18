@@ -1,11 +1,12 @@
 <?php
 
-use Src\{Cliete, Conta, CPF, Endereco};
+use Src\Modelo\Conta\Cliete;
+use Src\Modelo\Conta\Conta;
+use Src\Modelo\{CPF, Endereco};
 
 require_once "vendor/autoload.php";
 
 $endereco = new Endereco('São Paulo', 'Pq. Independência', 'José Ribeiro Ramos', '28');
-
 $cpfCliente = new CPF('445.473.218-39');
 
 $cliente = new Cliete('Marcone Santos', $cpfCliente, $endereco);

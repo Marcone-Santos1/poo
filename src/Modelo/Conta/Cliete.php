@@ -1,6 +1,10 @@
 <?php
 
-namespace Src;
+namespace src\Modelo\Conta;
+
+use Src\Modelo\CPF;
+use Src\Modelo\Endereco;
+use Src\Modelo\Pessoa;
 
 class Cliete extends Pessoa
 {
