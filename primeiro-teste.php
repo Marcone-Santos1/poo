@@ -18,7 +18,7 @@ $cpf->depositar(1000);
 $cpf->tranferir($cpf2, 100);
 $cpf2->tranferir($cpf, 500);
 
-echo PHP_EOL;
 
 var_dump($cpf->getCpf(), $cpf->getSaldo());
+echo PHP_EOL;
 var_dump($cpf2->getCpf(), $cpf2->getSaldo());
