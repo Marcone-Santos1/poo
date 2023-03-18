@@ -2,7 +2,7 @@
 
 use Src\Modelo\Conta\Cliete;
 use Src\Modelo\Conta\Conta;
-use Src\Modelo\{CPF, Endereco};
+use Src\Modelo\{Conta\ContaCorrente, Conta\ContaPoupanca, CPF, Endereco};
 
 require_once "vendor/autoload.php";
 
@@ -12,20 +12,19 @@ $cpfCliente = new CPF('445.473.218-39');
 $cliente = new Cliete('Marcone Santos', $cpfCliente, $endereco);
 $cliente2 = new Cliete('Marcone Santos', $cpfCliente, $endereco);
 
-$cpf = new Conta($cliente, 400);
-$cpf2 = new Conta($cliente2, 400);
+$cpf = new ContaPoupanca($cliente, 500);
+$cpf2 = new ContaCorrente($cliente2, 1500);
 
-$cpf->sacar(200);
 $cpf->sacar(100);
-$cpf->sacar(100);
+$cpf2->sacar(100);
 
-$cpf2->depositar(1000);
-
-$cpf->depositar(1000);
-$cpf->depositar(1000);
-
-$cpf->tranferir($cpf2, 100);
-$cpf2->tranferir($cpf, 1500);
+//$cpf2->depositar(1000);
+//
+//$cpf->depositar(1000);
+//$cpf->depositar(1000);
+//
+//$cpf->tranferir($cpf2, 100);
+$cpf2->tranferir($cpf, 1000);
 
 
 var_dump($cliente->getTitular(), $cliente->getCpf()->recuperaNumero(), $cpf->getSaldo(), $cliente->getEndereco()->getRua());
