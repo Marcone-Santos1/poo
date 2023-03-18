@@ -1,13 +1,15 @@
 <?php
 
-use src\Cliete;
-use src\Conta;
+use Src\{Cliete, Conta, CPF, Endereco};
 
-require_once 'src/Conta.php';
-require_once 'src/Cliete.php';
+require_once "vendor/autoload.php";
 
-$cliente = new Cliete('Marcone Santos', '44547321833');
-$cliente2 = new Cliete('Marcone Santos', '99999999999');
+$endereco = new Endereco('São Paulo', 'Pq. Independência', 'José Ribeiro Ramos', '28');
+
+$cpfCliente = new CPF('445.473.218-39');
+
+$cliente = new Cliete('Marcone Santos', $cpfCliente, $endereco);
+$cliente2 = new Cliete('Marcone Santos', $cpfCliente, $endereco);
 
 $cpf = new Conta($cliente, 400);
 $cpf2 = new Conta($cliente2, 400);
@@ -25,9 +27,9 @@ $cpf->tranferir($cpf2, 100);
 $cpf2->tranferir($cpf, 1500);
 
 
-var_dump($cliente->getCpf(), $cpf->getSaldo());
+var_dump($cliente->getTitular(), $cliente->getCpf()->recuperaNumero(), $cpf->getSaldo(), $cliente->getEndereco()->getRua());
 echo PHP_EOL;
-var_dump($cliente2->getCpf(), $cpf2->getSaldo());
+var_dump($cliente2->getTitular(), $cliente->getCpf()->recuperaNumero(), $cpf2->getSaldo(), $cliente2->getEndereco()->getRua());
 
 echo PHP_EOL;
 echo Conta::getNumeroContas();

@@ -1,24 +1,20 @@
 <?php
 
-namespace src;
+namespace Src;
 
-class Cliete
+class Cliete extends Pessoa
 {
-    private string $cpf;
-    private string $titular;
+    private Endereco $endereco;
 
-    public function __construct(string $titular, string $cpf)
+    public function __construct(string $nome, CPF $cpf, Endereco $endereco)
     {
-        $this->titular = $titular;
-        $this->cpf = $cpf;
-    }
-    public function getTitular(): string
-    {
-        return $this->titular;
+        parent::__construct($nome, $cpf);
+        $this->endereco = $endereco;
     }
 
-    public function getCpf(): string
+    public function getEndereco(): Endereco
     {
-        return $this->cpf;
+        return $this->endereco;
     }
+
 }
