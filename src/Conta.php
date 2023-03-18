@@ -7,15 +7,21 @@ use ValueError;
 
 class Conta
 {
-    private string $cpf;
-    private string $titular;
-    private float $saldo;
 
-    public function __construct(string $cpf, string $titular, float $saldo)
+    private float $saldo;
+    private static int $numeroDeConta = 0;
+    private Cliete $cliente;
+
+    public function __construct(Cliete $cliete, float $saldo)
     {
-        $this->cpf = $cpf;
-        $this->titular = $titular;
+        $this->cliente = $cliete;
         $this->saldo = $saldo;
+        self::$numeroDeConta++;
+    }
+
+    public function __destruct()
+    {
+        self::$numeroDeConta--;
     }
 
     public function sacar(float $valor): float
@@ -26,8 +32,7 @@ class Conta
 
     public function depositar(float $valor): float
     {
-        if ($valor <= 0)
-        {
+        if ($valor <= 0) {
             throw new ValueError('Valor inválido!');
         }
         return $this->saldo += $valor;
@@ -37,39 +42,26 @@ class Conta
     {
         $this->validaValor($valor);
 
-        if ($conta === $this)
-        {
+        if ($conta === $this) {
             throw new DomainException("Transferência inválida!");
         }
 
         return [$this->sacar($valor), $conta->depositar($valor)];
     }
 
-    /**
-     * @return string
-     */
-    public function getCpf(): string
-    {
-        return $this->cpf;
-    }
-    public function getSaldo(): float
-    {
-        return $this->saldo;
-
-    }public function getTitular(): string
-    {
-        return $this->titular;
-    }
-
-    /**
-     * @param float $valor
-     * @return void
-     */
     private function validaValor(float $valor): void
     {
         if ($valor > $this->saldo || $valor <= 0) {
             throw new ValueError('Valor inválido!');
         }
     }
+    public static function getNumeroContas(): int
+    {
+        return self::$numeroDeConta;
+    }
+    public function getSaldo(): float
+    {
+        return $this->saldo;
 
+    }
 }
